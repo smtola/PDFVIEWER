@@ -1,0 +1,38 @@
+{
+  "name": "review_fa_file_pdf",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.48.1",
+    "canvas": "^3.1.0",
+    "core-js": "^3.40.0",
+    "flowbite-react": "^0.10.2",
+    "glob": "^9.3.5",
+    "lru-cache": "^11.0.2",
+    "next": "^15.1.6",
+    "pdfjs-dist": "^4.10.38",
+    "react": "^18.3.1",
+    "react-datepicker": "^7.6.0",
+    "react-dom": "^18.3.1",
+    "react-pdf": "^9.2.1",
+    "rimraf": "^4.4.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-pdf": "^6.2.0",
+    "daisyui": "^4.12.23",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

@@ -23,10 +23,15 @@ export default function PdfView(
     const [pageNumber, setPageNumber] = useState<number>(1);
     const viewerRef = useRef<HTMLDivElement>(null);
     const [toggleScreen, setToggleScreen] = useState<boolean>(true);
+    const [scale, setScale] = useState<number>(.9);
 
-
+    const zoomIn = () => setScale((prev) => Math.min(prev + 0.2, 2));
+    const zoomOut = () => setScale((prev) => Math.max(prev - 0.2, 0.5));
+console.log(scale)
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-        setNumPages(numPages);
+        if (numPages !== undefined && numPages !== numPages) {
+            setNumPages(numPages);
+        }
     }
 
     function toggleFullscreen() {
@@ -49,8 +54,10 @@ export default function PdfView(
             {fileName ? (
                 <Document file={fileName} onLoadSuccess={onDocumentLoadSuccess} className="flex justify-center items-center md:items-center w-full">
                     <Page
+                        key={`${pageNumber}-${scale}`}
                         pageNumber={pageNumber}
-                        className="border border-gray-100 shadow-lg scale-[.7] md:scale-[.95]"
+                        scale={scale}
+                        className={`border border-gray-100 shadow-lg pointer-events-none`}
                     />
                 </Document>
             ) : (
@@ -135,8 +142,25 @@ export default function PdfView(
                         :
                         ''
                     }
-                </div>
 
+                </div>
+                <div className="flex flex-col space-y-2">
+                    <h1>Zoom</h1>
+                    <button
+                        onClick={zoomIn}
+                        data-tip='Zoom In'
+                        className="tooltip text-center inline-block rounded-full border border-gray-800 bg-gray-800 px-2 py-1 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                    >
+                        +
+                    </button>
+                    <button
+                        onClick={zoomOut}
+                        data-tip='Zoom Out'
+                        className="tooltip text-center inline-block rounded-full border border-gray-800 bg-gray-800 px-2 py-1 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                    >
+                        -
+                    </button>
+                </div>
             </div>
         </div>
     );

@@ -29,9 +29,7 @@ export default function PdfView(
     const zoomOut = () => setScale((prev) => Math.max(prev - 0.2, 0.5));
 console.log(scale)
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-        if (numPages !== undefined && numPages !== numPages) {
-            setNumPages(numPages);
-        }
+        setNumPages(numPages);
     }
 
     function toggleFullscreen() {
@@ -56,7 +54,7 @@ console.log(scale)
                     <Page
                         pageNumber={pageNumber}
                         scale={scale}
-                        className={`border border-gray-100 shadow-lg pointer-events-none`}
+                        className={`border border-gray-100 shadow-lg`}
                     />
                 </Document>
             ) : (

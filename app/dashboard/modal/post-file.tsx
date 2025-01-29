@@ -8,6 +8,8 @@ export default function Post() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [fileName, setFileName] = useState<string>('');
     const [file, setFile] = useState<any | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [message, setMessage] = useState<boolean>(true);
     const supabase =  createClient();
     // Handle modal open/close
     const handleOpenModal = () => setIsModalOpen(true);
@@ -19,37 +21,44 @@ export default function Post() {
             return;
         }
 
-        // Upload file to Supabase storage
-        const { data, error } = await supabase.storage
-            .from("personal")
-            .upload(`pdfs/${file.name}`, file);
+        try {
+            // Upload file to Supabase storage
+            const { data, error } = await supabase.storage
+                .from("personal")
+                .upload(`pdfs/${file.name}`, file);
 
-        if (error) {
-            console.error("File upload error:", error.message);
-            return;
+            if (error) {
+                console.error("File upload error:", error.message);
+                return;
+            }
+
+            // Get file URL
+            const { data: publicUrl  } = supabase.storage.from("personal").getPublicUrl(data.path);
+
+            // Insert record into Supabase database
+            const { data: insertedData, error: insertError } = await supabase
+                .from("pdfFiles")
+                .insert([
+                    {
+                        file_name: fileName,
+                        file: publicUrl.publicUrl,
+                        fa_date: startDate,
+                    },
+                ]);
+
+            setLoading(false);
+            if (insertError) {
+                console.error("Database insert error:", insertError.message);
+            } else {
+                setIsModalOpen(false);
+                alert("File uploaded and data saved successfully!");
+                setLoading(false);
+            }
+        }catch (e:any){
+            setMessage(e.message);
+        }finally {
+            setLoading(false);
         }
-
-        // Get file URL
-        const { data: publicUrl  } = supabase.storage.from("personal").getPublicUrl(data.path);
-
-        // Insert record into Supabase database
-        const { data: insertedData, error: insertError } = await supabase
-            .from("pdfFiles")
-            .insert([
-                {
-                    file_name: fileName,
-                    file: publicUrl.publicUrl,
-                    fa_date: startDate,
-                },
-            ]);
-
-        if (insertError) {
-            console.error("Database insert error:", insertError.message);
-        } else {
-            setIsModalOpen(false);
-            alert("File uploaded and data saved successfully!");
-        }
-
     }
 
     return (
@@ -87,7 +96,7 @@ export default function Post() {
 
                         <h3 className="font-bold text-lg">Upload File!</h3>
 
-                        <form className="py-10 space-y-10" onSubmit={handleSubmit}>
+                        <form className="py-10 space-y-7" onSubmit={handleSubmit}>
                             <div>
                                 <label className="input input-bordered flex items-center gap-2">
                                     File Name
@@ -131,10 +140,33 @@ export default function Post() {
                                     />
                                 </label>
                             </div>
-
-                            <button type="submit" className="btn btn-active btn-accent float-end">
-                                Save
-                            </button>
+                            {!message ?
+                            <div role="alert" className="alert alert-error">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-4 w-4 shrink-0 stroke-current"
+                                    fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>Error! Task failed successfully.</span>
+                            </div>
+                                :''
+                            }
+                            {!loading ?
+                                <button disabled={!loading} type="button" className="btn btn-active btn-accent float-end">
+                                    <span className="loading loading-spinner"></span>
+                                    Loading...
+                                </button>
+                                :
+                                <button type="submit" className="btn btn-active btn-accent float-end">
+                                    Save
+                                </button>
+                            }
                         </form>
                     </div>
                 </dialog>

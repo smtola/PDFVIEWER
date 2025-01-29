@@ -42,7 +42,7 @@ export default function SideBar({ onSelectPdf }: SideBarProps) {
     }
 
     return (
-        <ul className="my-[1em] flex flex-row lg:flex-col space-x-4 lg:space-x-2">
+        <ul className="my-[1em] flex flex-row lg:flex-col space-x-4 lg:space-x-0 lg:space-y-3 ">
             <li className="hidden
             lg:flex flex-col justify-center items-center py-3 border-gray-500 border-b-2">
                <h1 className="text-center text-balance"
@@ -52,10 +52,10 @@ export default function SideBar({ onSelectPdf }: SideBarProps) {
                 (
                     dataFiles.map((items) =>
                             <li key={items.id} className="
-                                hover:bg-black/50   hover:dark:bg-black/50 w-full
-                                flex flex-col justify-center items-center py-3 border-gray-500 border-b-2">
+                                hover:bg-black/50  hover:dark:bg-black/50 w-full
+                                flex flex-col justify-center items-center border-gray-500 border-b-2 px-2">
                                 <button onClick={() => handleClickChange(items.id)} type="button"
-                                    className="w-[20vh] lg:w-full flex flex-col justify-center items-start">
+                                    className="w-[14vh] md:w-[20vh] lg:w-full flex flex-col justify-center items-start">
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="32" height="32" strokeWidth="1">
                                           <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>

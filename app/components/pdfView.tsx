@@ -43,14 +43,14 @@ export default function PdfView(
     }
     return (
         <div
-            className="relative flex flex-col items-center bg-gray-100 dark:bg-gray-900 p-4"
+            className="relative flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 p-4"
             ref={viewerRef}
         >
             {fileName ? (
                 <Document file={fileName} onLoadSuccess={onDocumentLoadSuccess} className="flex justify-center items-center md:items-center w-full">
                     <Page
                         pageNumber={pageNumber}
-                        className="border border-gray-100 shadow-lg scale-[.7] md:scale-[1.1]"
+                        className="border border-gray-100 shadow-lg scale-[.7] md:scale-[.95]"
                     />
                 </Document>
             ) : (
@@ -58,7 +58,7 @@ export default function PdfView(
             )}
 
             {/* Controls positioned at the top-right */}
-            <div className="bg-black/50 p-4 rounded-lg w-[11vh] xl:w-[14vh] h-fit fixed bottom-[5%] lg:top-[7%] xl:top-[10%] right-[4%] lg:right-[10%] 2xl:right-[10%] z-10 flex flex-col gap-3 px-2">
+            <div className="bg-black/50 p-4 rounded-lg w-[11vh] xl:w-[14vh] h-fit fixed bottom-[5%] lg:top-[7%] xl:top-[11%] right-[4%] lg:right-[10%] 2xl:right-[10%] z-10 flex flex-col gap-3 px-2">
                 <p className="mb-2 text-gray-900 dark:text-gray-100">
                     Page {pageNumber} of {numPages}
                 </p>

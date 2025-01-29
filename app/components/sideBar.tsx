@@ -66,7 +66,7 @@ export default function SideBar({ onSelectPdf }: SideBarProps) {
                                           <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z"></path>
                                         </svg>
                                     </span>
-                                    <h2>
+                                    <h2 className="text-start text-[12px] md:text-[16px]">
                                         {items.file_name}
                                     </h2>
                                     <span

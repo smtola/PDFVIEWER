@@ -63,7 +63,7 @@ console.log(scale)
 
             {/* Controls positioned at the top-right */}
             <div className="bg-black/50 p-4 rounded-lg w-[11vh] xl:w-[14vh] h-fit fixed bottom-[5%] lg:top-[7%] xl:top-[12%] right-[4%] lg:right-[10%] 2xl:right-[14%] z-10 flex flex-col gap-3 px-2">
-                <p className="mb-2 text-gray-900 dark:text-gray-100">
+                <p className="mb-2 text-gray-900 dark:text-gray-100 text-[12px] md:text-[16px]">
                     Page {pageNumber} of {numPages}
                 </p>
                 <div className="flex flex-wrap justify-center gap-3">

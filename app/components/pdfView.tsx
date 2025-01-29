@@ -43,7 +43,7 @@ export default function PdfView(
     }
     return (
         <div
-            className="relative flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-900 p-4"
+            className="relative flex flex-col justify-center items-center bg-black/0 p-4"
             ref={viewerRef}
         >
             {fileName ? (
@@ -58,7 +58,7 @@ export default function PdfView(
             )}
 
             {/* Controls positioned at the top-right */}
-            <div className="bg-black/50 p-4 rounded-lg w-[11vh] xl:w-[14vh] h-fit fixed bottom-[5%] lg:top-[7%] xl:top-[11%] right-[4%] lg:right-[10%] 2xl:right-[10%] z-10 flex flex-col gap-3 px-2">
+            <div className="bg-black/50 p-4 rounded-lg w-[11vh] xl:w-[14vh] h-fit fixed bottom-[5%] lg:top-[7%] xl:top-[12%] right-[4%] lg:right-[10%] 2xl:right-[14%] z-10 flex flex-col gap-3 px-2">
                 <p className="mb-2 text-gray-900 dark:text-gray-100">
                     Page {pageNumber} of {numPages}
                 </p>

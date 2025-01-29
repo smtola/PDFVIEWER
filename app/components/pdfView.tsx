@@ -54,7 +54,6 @@ console.log(scale)
             {fileName ? (
                 <Document file={fileName} onLoadSuccess={onDocumentLoadSuccess} className="flex justify-center items-center md:items-center w-full">
                     <Page
-                        key={`${pageNumber}-${scale}`}
                         pageNumber={pageNumber}
                         scale={scale}
                         className={`border border-gray-100 shadow-lg pointer-events-none`}

@@ -22,7 +22,7 @@ export default function PdfView(
     const [numPages, setNumPages] = useState<number | undefined>(undefined);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const viewerRef = useRef<HTMLDivElement>(null);
-    const [toggleScreen, setToggleScreen] = useState<boolean>();
+    const [toggleScreen, setToggleScreen] = useState<boolean>(true);
 
 
     function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
